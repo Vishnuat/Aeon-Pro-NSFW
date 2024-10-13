@@ -94,32 +94,31 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         )
         
 	    
-mediainfo = (
+      mediainfo = (
             "Enabled"
             if user_dict.get("mediainfo", config_dict["SHOW_MEDIAINFO"])
             else "Disabled"
-        )
-        buttons.callback(
+      )
+      buttons.callback(
             "Disable MediaInfo" if mediainfo == "Enabled" else "Enable MediaInfo",
             f"userset {user_id} mediainfo",
-        )
-        if config_dict["SHOW_MEDIAINFO"]:
+     )
+     if config_dict["SHOW_MEDIAINFO"]:
             mediainfo = "Force Enabled"
+      buttons.callback("Remname", f"userset {user_id} remname")
+      remname = user_dict.get("remname", "Not Exists")
 
-        if user_dict.get("media_group", False) or (
+     if user_dict.get("media_group", False) or (
             "media_group" not in user_dict and config_dict["MEDIA_GROUP"]
         ):
             buttons.callback("Disable Media Group", f"userset {user_id} mgroup")
-        else:
+     else:
             buttons.callback("Enable Media Group", f"userset {user_id} mgroup")
         media_group = (
             "Enabled"
-            if user_dict.get("media_group", config_dict.get("MEDIA_GROUP"))
-            else "Disabled"
-        )
-
-        buttons.callback("Remname", f"userset {user_id} remname")
-        remname = user_dict.get("remname", "Not Exists")
+     if user_dict.get("media_group", config_dict.get("MEDIA_GROUP"))
+     else "Disabled"
+	)
 
         buttons.callback("Attachment", f"userset {user_id} attachment")
         attachment = user_dict.get("attachment", "Not Exists")
