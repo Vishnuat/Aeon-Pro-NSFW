@@ -138,15 +138,6 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
             ltype = "MEDIA"
             buttons.callback("Send As Document", f"userset {user_id} doc")
 
-            buttons.callback("Thumbnail", f"userset {user_id} thumb")
-            thumbmsg = "Exists" if await aiopath.exists(thumbpath) else "Not Exists"
-
-            buttons.callback("Leech Caption", f"userset {user_id} lcaption")
-            lcaption = user_dict.get("lcaption", "Not Exists")
-
-            buttons.callback("Metadata", f"userset {user_id} metadata")
-            metadata = user_dict.get("metadata", "Not Exists")
-
         mediainfo = (
             "Enabled"
             if user_dict.get("mediainfo", config_dict["SHOW_MEDIAINFO"])
@@ -158,8 +149,8 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         )
         if config_dict["SHOW_MEDIAINFO"]:
             mediainfo = "Force Enabled"
-        buttons.callback("Leech Dump", f"userset {user_id} ldump")
-        ldump = "Not Exists" if (val := user_dict.get("ldump", "")) == "" else val
+        buttons.callback("Thumbnail", f"userset {user_id} thumb")
+        thumbmsg = "Exists" if await aiopath.exists(thumbpath) else "Not Exists"
 
         if user_dict.get("media_group", False) or (
             "media_group" not in user_dict and config_dict["MEDIA_GROUP"]
@@ -172,6 +163,15 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
             if user_dict.get("media_group", config_dict.get("MEDIA_GROUP"))
             else "Disabled"
         )
+
+        buttons.callback("Leech Caption", f"userset {user_id} lcaption")
+        lcaption = user_dict.get("lcaption", "Not Exists")
+
+        buttons.callback("Metadata", f"userset {user_id} metadata")
+        metadata = user_dict.get("metadata", "Not Exists")
+
+        buttons.callback("Leech Dump", f"userset {user_id} ldump")
+        ldump = "Not Exists" if (val := user_dict.get("ldump", "")) == "" else val
 
 
         SPLIT_SIZE = "4GB" if IS_PREMIUM_USER else "2GB"
