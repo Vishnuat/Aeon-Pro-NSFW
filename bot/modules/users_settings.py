@@ -92,6 +92,9 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
             == ""
             else val
         )
+        buttons.callback("Prefix", f"userset {user_id} prefix")
+        prefix = user_dict.get("prefix", "Not Exists")
+        
         buttons.callback("Suffix", f"userset {user_id} suffix")
         suffix = user_dict.get("suffix", "Not Exists")
 
@@ -104,6 +107,7 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         text = f"<b>Universal Settings for {name}</b>\n\n"
         text += f"<b>• YT-DLP Options:</b> <b><code>{ytopt}</code></b>\n"
         text += f"<b>• Suffix:</b> <code>{suffix}</code>\n"
+        text += f"<b>• Prefix:</b> <code>{prefix}</code>\n"
         text += f"<b>• Attachment:</b> <code>{attachment}</code>\n"
         text += f"<b>• Remname:</b> <code>{remname}</code>"
         buttons.callback("Back", f"userset {user_id} back", "footer")
@@ -143,9 +147,6 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
             buttons.callback("Metadata", f"userset {user_id} metadata")
             metadata = user_dict.get("metadata", "Not Exists")
 
-            buttons.callback("Prefix", f"userset {user_id} prefix")
-            prefix = user_dict.get("prefix", "Not Exists")
-
         mediainfo = (
             "Enabled"
             if user_dict.get("mediainfo", config_dict["SHOW_MEDIAINFO"])
@@ -179,7 +180,6 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         text += f"<b>• Leech Type:</b> {ltype}\n"
         text += f"<b>• Custom Thumbnail:</b> {thumbmsg}\n"
         text += f"<b>• Metadata:</b> <code>{metadata}</code>\n"
-        text += f"<b>• Prefix:</b> <code>{prefix}</code>\n"
         text += f"<b>• Media Group:</b> {media_group}\n"
         text += f"<b>• Leech Caption:</b> <code>{escape(lcaption)}</code>\n"
         text += f"<b>• Leech Dump:</b> <code>{ldump}</code>\n"
