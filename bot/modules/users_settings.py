@@ -171,6 +171,9 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         buttons.callback("Leech Caption", f"userset {user_id} lcaption")
         lcaption = user_dict.get("lcaption", "Not Exists")
 
+        buttons.callback("Metadata", f"userset {user_id} metadata")
+        metadata = user_dict.get("metadata", "Not Exists")
+
         buttons.callback("Leech Dump", f"userset {user_id} ldump")
         ldump = "Not Exists" if (val := user_dict.get("ldump", "")) == "" else val
 
@@ -178,6 +181,7 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         text = f"<b>Leech Settings for {name}</b>\n\n"
         text += f"<b>• Leech split size:</b> {SPLIT_SIZE}\n"
         text += f"<b>• Leech Type:</b> {ltype}\n"
+        text += f"<b>• Metadata:</b> <code>{metadata}</code>\n"
         text += f"<b>• Custom Thumbnail:</b> {thumbmsg}\n"
         text += f"<b>• Media Group:</b> {media_group}\n"
         text += f"<b>• Leech Caption:</b> <code>{escape(lcaption)}</code>\n"
