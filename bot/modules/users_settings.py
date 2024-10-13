@@ -95,6 +95,9 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         buttons.callback("Remname", f"userset {user_id} remname")
         remname = user_dict.get("remname", "Not Exists")
 
+	buttons.callback("Suffix", f"userset {user_id} suffix")
+        suffix = user_dict.get("suffix", "Not Exists")
+
         buttons.callback("Attachment", f"userset {user_id} attachment")
         attachment = user_dict.get("attachment", "Not Exists")
 
@@ -142,9 +145,6 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
 
         buttons.callback("Prefix", f"userset {user_id} prefix")
         prefix = user_dict.get("prefix", "Not Exists")
-
-        buttons.callback("Suffix", f"userset {user_id} suffix")
-        suffix = user_dict.get("suffix", "Not Exists")
 
         buttons.callback("Leech Dump", f"userset {user_id} ldump")
         ldump = "Not Exists" if (val := user_dict.get("ldump", "")) == "" else val
