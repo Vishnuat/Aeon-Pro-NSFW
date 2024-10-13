@@ -92,26 +92,18 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
             == ""
             else val
         )
-        buttons.callback("Prefix", f"userset {user_id} prefix")
-        prefix = user_dict.get("prefix", "Not Exists")
-
         buttons.callback("Suffix", f"userset {user_id} suffix")
         suffix = user_dict.get("suffix", "Not Exists")
 
         buttons.callback("Remname", f"userset {user_id} remname")
         remname = user_dict.get("remname", "Not Exists")
 
-        buttons.callback("Metadata", f"userset {user_id} metadata")
-        metadata = user_dict.get("metadata", "Not Exists")
-
         buttons.callback("Attachment", f"userset {user_id} attachment")
         attachment = user_dict.get("attachment", "Not Exists")
 
         text = f"<b>Universal Settings for {name}</b>\n\n"
         text += f"<b>• YT-DLP Options:</b> <b><code>{ytopt}</code></b>\n"
-        text += f"<b>• Prefix:</b> <code>{prefix}</code>\n"
         text += f"<b>• Suffix:</b> <code>{suffix}</code>\n"
-        text += f"<b>• Metadata:</b> <code>{metadata}</code>\n"
         text += f"<b>• Attachment:</b> <code>{attachment}</code>\n"
         text += f"<b>• Remname:</b> <code>{remname}</code>"
         buttons.callback("Back", f"userset {user_id} back", "footer")
@@ -142,6 +134,18 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
             ltype = "MEDIA"
             buttons.callback("Send As Document", f"userset {user_id} doc")
 
+            buttons.callback("Thumbnail", f"userset {user_id} thumb")
+            thumbmsg = "Exists" if await aiopath.exists(thumbpath) else "Not Exists"
+
+            buttons.callback("Leech Caption", f"userset {user_id} lcaption")
+            lcaption = user_dict.get("lcaption", "Not Exists")
+
+            buttons.callback("Metadata", f"userset {user_id} metadata")
+            metadata = user_dict.get("metadata", "Not Exists")
+
+            buttons.callback("Prefix", f"userset {user_id} prefix")
+            prefix = user_dict.get("prefix", "Not Exists")
+
         mediainfo = (
             "Enabled"
             if user_dict.get("mediainfo", config_dict["SHOW_MEDIAINFO"])
@@ -153,8 +157,8 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         )
         if config_dict["SHOW_MEDIAINFO"]:
             mediainfo = "Force Enabled"
-        buttons.callback("Thumbnail", f"userset {user_id} thumb")
-        thumbmsg = "Exists" if await aiopath.exists(thumbpath) else "Not Exists"
+        buttons.callback("Leech Dump", f"userset {user_id} ldump")
+        ldump = "Not Exists" if (val := user_dict.get("ldump", "")) == "" else val
 
         if user_dict.get("media_group", False) or (
             "media_group" not in user_dict and config_dict["MEDIA_GROUP"]
@@ -168,17 +172,14 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
             else "Disabled"
         )
 
-        buttons.callback("Leech Caption", f"userset {user_id} lcaption")
-        lcaption = user_dict.get("lcaption", "Not Exists")
-
-        buttons.callback("Leech Dump", f"userset {user_id} ldump")
-        ldump = "Not Exists" if (val := user_dict.get("ldump", "")) == "" else val
 
         SPLIT_SIZE = "4GB" if IS_PREMIUM_USER else "2GB"
         text = f"<b>Leech Settings for {name}</b>\n\n"
         text += f"<b>• Leech split size:</b> {SPLIT_SIZE}\n"
         text += f"<b>• Leech Type:</b> {ltype}\n"
         text += f"<b>• Custom Thumbnail:</b> {thumbmsg}\n"
+        text += f"<b>• Metadata:</b> <code>{metadata}</code>\n"
+        text += f"<b>• Prefix:</b> <code>{prefix}</code>\n"
         text += f"<b>• Media Group:</b> {media_group}\n"
         text += f"<b>• Leech Caption:</b> <code>{escape(lcaption)}</code>\n"
         text += f"<b>• Leech Dump:</b> <code>{ldump}</code>\n"
@@ -191,7 +192,7 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         text = f"<b><u>{fname_dict[key]} Settings :</u></b>\n\n"
         if key == "rcc":
             set_exist = await aiopath.exists(rclone_path)
-            text += f"<b>rcl.conf File :</b> {'' if set_exist else 'Not'} Exists\n\n"
+            text += f"<b>rcl.conf File :</b> {'' if set_exist lse 'Not'} Exists\n\n"
         elif key == "thumb":
             set_exist = await aiopath.exists(thumbpath)
             text += (
