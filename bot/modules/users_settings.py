@@ -92,10 +92,8 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
             == ""
             else val
         )
-        
-	    
       mediainfo = (
-            "Enabled"
+           "Enabled"
             if user_dict.get("mediainfo", config_dict["SHOW_MEDIAINFO"])
             else "Disabled"
       )
