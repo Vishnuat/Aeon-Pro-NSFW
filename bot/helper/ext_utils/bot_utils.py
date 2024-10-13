@@ -109,18 +109,18 @@ STATUS_LIMIT = 4
 
 
 class MirrorStatus:
-    STATUS_UPLOADING = "Uploading📤"
-    STATUS_DOWNLOADING = "Downloading📥"
+    STATUS_UPLOADING = "Uploading 📤"
+    STATUS_DOWNLOADING = "Downloading 📥"
     STATUS_CLONING = "Cloning"
     STATUS_QUEUEDL = "DL queued"
     STATUS_QUEUEUP = "UL queued"
     STATUS_PAUSED = "Paused"
     STATUS_ARCHIVING = "Archiving"
-    STATUS_EXTRACTING = "Extracting"
+    STATUS_EXTRACTING = "Extracting 📂"
     STATUS_SPLITTING = "Splitting"
     STATUS_CHECKING = "CheckUp"
     STATUS_SEEDING = "Seeding"
-    STATUS_PROCESSING = "Metadata Adding⌛"
+    STATUS_PROCESSING = "Metadata Adding ⌛"
 
 
 class SetInterval:
