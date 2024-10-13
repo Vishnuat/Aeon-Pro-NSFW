@@ -93,8 +93,30 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
             else val
         )
         
-        buttons.callback("Suffix", f"userset {user_id} suffix")
-        suffix = user_dict.get("suffix", "Not Exists")
+	    
+mediainfo = (
+            "Enabled"
+            if user_dict.get("mediainfo", config_dict["SHOW_MEDIAINFO"])
+            else "Disabled"
+        )
+        buttons.callback(
+            "Disable MediaInfo" if mediainfo == "Enabled" else "Enable MediaInfo",
+            f"userset {user_id} mediainfo",
+        )
+        if config_dict["SHOW_MEDIAINFO"]:
+            mediainfo = "Force Enabled"
+
+        if user_dict.get("media_group", False) or (
+            "media_group" not in user_dict and config_dict["MEDIA_GROUP"]
+        ):
+            buttons.callback("Disable Media Group", f"userset {user_id} mgroup")
+        else:
+            buttons.callback("Enable Media Group", f"userset {user_id} mgroup")
+        media_group = (
+            "Enabled"
+            if user_dict.get("media_group", config_dict.get("MEDIA_GROUP"))
+            else "Disabled"
+        )
 
         buttons.callback("Remname", f"userset {user_id} remname")
         remname = user_dict.get("remname", "Not Exists")
@@ -134,32 +156,9 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         else:
             ltype = "MEDIA"
             buttons.callback("Send As Document", f"userset {user_id} doc")
-
-        mediainfo = (
-            "Enabled"
-            if user_dict.get("mediainfo", config_dict["SHOW_MEDIAINFO"])
-            else "Disabled"
-        )
-        buttons.callback(
-            "Disable MediaInfo" if mediainfo == "Enabled" else "Enable MediaInfo",
-            f"userset {user_id} mediainfo",
-        )
-        if config_dict["SHOW_MEDIAINFO"]:
-            mediainfo = "Force Enabled"
+		
         buttons.callback("Thumbnail", f"userset {user_id} thumb")
         thumbmsg = "Exists" if await aiopath.exists(thumbpath) else "Not Exists"
-
-        if user_dict.get("media_group", False) or (
-            "media_group" not in user_dict and config_dict["MEDIA_GROUP"]
-        ):
-            buttons.callback("Disable Media Group", f"userset {user_id} mgroup")
-        else:
-            buttons.callback("Enable Media Group", f"userset {user_id} mgroup")
-        media_group = (
-            "Enabled"
-            if user_dict.get("media_group", config_dict.get("MEDIA_GROUP"))
-            else "Disabled"
-        )
 
         buttons.callback("Leech Caption", f"userset {user_id} lcaption")
         lcaption = user_dict.get("lcaption", "Not Exists")
@@ -169,6 +168,9 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
 
         buttons.callback("Prefix", f"userset {user_id} prefix")
         prefix = user_dict.get("prefix", "Not Exists")
+
+        buttons.callback("Suffix", f"userset {user_id} suffix")
+        suffix = user_dict.get("suffix", "Not Exists")
 
         buttons.callback("Leech Dump", f"userset {user_id} ldump")
         ldump = "Not Exists" if (val := user_dict.get("ldump", "")) == "" else val
