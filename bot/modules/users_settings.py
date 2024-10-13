@@ -102,7 +102,7 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         buttons.callback("Attachment", f"userset {user_id} attachment")
         attachment = user_dict.get("attachment", "Not Exists")
 
-        text = Universal Settings for {name}</b>\n\n"
+        text = f"<b>Universal Settings for {name}</b>\n\n"
         text += f"<b>• YT-DLP Options:</b> <b><code>{ytopt}</code></b>\n"
         text += f"<b>• Suffix:</b> <code>{suffix}</code>\n"
         text += f"<b>• Attachment:</b> <code>{attachment}</code>\n"
