@@ -95,7 +95,7 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         buttons.callback("Remname", f"userset {user_id} remname")
         remname = user_dict.get("remname", "Not Exists")
 
-	    buttons.callback("Suffix", f"userset {user_id} suffix")
+	buttons.callback("Suffix", f"userset {user_id} suffix")
         suffix = user_dict.get("suffix", "Not Exists")
 
         buttons.callback("Attachment", f"userset {user_id} attachment")
