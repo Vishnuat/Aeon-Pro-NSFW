@@ -109,8 +109,8 @@ STATUS_LIMIT = 4
 
 
 class MirrorStatus:
-    STATUS_UPLOADING = "Uploading"
-    STATUS_DOWNLOADING = "Downloading"
+    STATUS_UPLOADING = "Uploading📤"
+    STATUS_DOWNLOADING = "Downloading📥"
     STATUS_CLONING = "Cloning"
     STATUS_QUEUEDL = "DL queued"
     STATUS_QUEUEUP = "UL queued"
@@ -120,7 +120,7 @@ class MirrorStatus:
     STATUS_SPLITTING = "Splitting"
     STATUS_CHECKING = "CheckUp"
     STATUS_SEEDING = "Seeding"
-    STATUS_PROCESSING = "Processing"
+    STATUS_PROCESSING = "Metadata Adding⌛"
 
 
 class SetInterval:
@@ -248,7 +248,7 @@ def source(self):
 
 
 def get_readable_message():
-    msg = "<b>Powered by Aeon</b>\n\n"
+    msg = "<b>Powered by @OM_links</b>\n\n"
     button = None
     tasks = len(download_dict)
     current_time = get_readable_time(time() - bot_start_time)
