@@ -105,7 +105,7 @@ SIZE_UNITS = ["B", "KB", "MB", "GB", "TB", "PB"]
 STATUS_START = 0
 PAGES = 1
 PAGE_NO = 1
-STATUS_LIMIT = 10
+STATUS_LIMIT = 6
 
 
 class MirrorStatus:
@@ -234,8 +234,8 @@ def progress_bar(pct):
         pct = float(pct.strip("%"))
     p = min(max(pct, 0), 100)
     c_full = int((p + 5) // 10)
-    p_str = "●" * c_full
-    p_str += "○" * (10 - c_full)
+    p_str = "█" * c_full
+    p_str += "▒" * (10 - c_full)
     return p_str
 
 
