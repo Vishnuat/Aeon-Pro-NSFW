@@ -20,7 +20,6 @@ from bot.helper.ext_utils.bot_utils import (
 )
 from bot.helper.ext_utils.exceptions import DirectDownloadLinkError
 from bot.helper.aeon_utils.nsfw_check import nsfw_precheck
-from bot.helper.aeon_utils.send_react import send_react
 from bot.helper.ext_utils.help_strings import CLONE_HELP_MESSAGE
 from bot.helper.ext_utils.task_manager import task_utils, limit_checker
 from bot.helper.telegram_helper.filters import CustomFilters
@@ -257,7 +256,6 @@ async def gdcloneNode(message, link, listen_up):
 
 @new_task
 async def clone(client, message):
-    await send_react(message)
     input_list = message.text.split(" ")
     arg_base = {
         "link": "",
@@ -286,7 +284,7 @@ async def clone(client, message):
     @new_task
     async def __run_multi():
         if multi > 1:
-            await sleep(5)
+            await sleep(2)
             msg = [s.strip() for s in input_list]
             index = msg.index("-i")
             msg[index + 1] = f"{multi - 1}"
@@ -298,7 +296,7 @@ async def clone(client, message):
                 chat_id=message.chat.id, message_ids=nextmsg.id
             )
             nextmsg.from_user = message.from_user
-            await sleep(5)
+            await sleep(2)
             clone(client, nextmsg)
 
     __run_multi()
