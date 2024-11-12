@@ -24,7 +24,6 @@ from bot.helper.ext_utils.bot_utils import (
 from bot.helper.ext_utils.bulk_links import extract_bulk_links
 from bot.helper.ext_utils.exceptions import DirectDownloadLinkError
 from bot.helper.aeon_utils.nsfw_check import nsfw_precheck
-from bot.helper.aeon_utils.send_react import send_react
 from bot.helper.ext_utils.help_strings import MIRROR_HELP_MESSAGE
 from bot.helper.ext_utils.task_manager import task_utils
 from bot.helper.telegram_helper.filters import CustomFilters
@@ -67,7 +66,6 @@ from bot.helper.mirror_leech_utils.download_utils.direct_link_generator import (
 async def _mirror_leech(
     client, message, is_qbit=False, is_leech=False, same_dir=None, bulk=[]
 ):
-    await send_react(message)
     user = message.from_user or message.sender_chat
     user_id = user.id
     user_dict = user_data.get(user_id, {})
